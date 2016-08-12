@@ -1,0 +1,38 @@
+shopware:
+  image: ffuenf/shopware
+  restart: always
+  volumes:
+   - ./var/www/html:/var/www/html
+  links:
+   - db
+  ports:
+   - "80:80"
+  environment:
+      SERVERNAME: ${SERVERNAME}
+      APACHE_LOG_DIR: /var/www/html/var/log/apache
+      SHOPWARE_VERSION: ${SHOPWARE_VERSION}
+      PHPMYADMIN_PW: ${PHPMYADMIN_PW}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+
+dbdata:
+    image: mysql:5.7
+    volumes:
+        - /var/lib/mysql
+    command: /bin/true
+
+db:
+    image: mysql:5.7
+    restart: always
+    ports:
+        - "3306:3306"
+    volumes_from:
+        - dbdata
+    environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
