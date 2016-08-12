@@ -1,0 +1,9 @@
+### Mac ###
+.DS_Store
+
+# Finally all files starting with .git are configured to be exempt to the above rules.
+# The primary benefit is that due to .gitkeep files within an otherwise empty directory
+# (after the above ignores are applied) will keep them in the project's structure.
+!.git*
+!*/.git*
+!**/.git*
