@@ -7,3 +7,5 @@
 !.git*
 !*/.git*
 !**/.git*
+
+var/www/html/config.php

@@ -1,28 +1,23 @@
 shopware:
   image: ffuenf/shopware
   restart: always
-  volumes:
-   - ./var/www/html:/var/www/html
+  volumes_from:
+    - data
   links:
    - db
   ports:
    - "80:80"
   environment:
       SERVERNAME: ${SERVERNAME}
-      APACHE_LOG_DIR: /var/www/html/var/log/apache
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
       SHOPWARE_VERSION: ${SHOPWARE_VERSION}
-      PHPMYADMIN_PW: ${PHPMYADMIN_PW}
+      APACHE_LOG_DIR: /var/www/html/var/log/apache
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_PORT: ${MYSQL_PORT}
-
-dbdata:
-    image: mysql:5.7
-    volumes:
-        - /var/lib/mysql
-    command: /bin/true
 
 db:
     image: mysql:5.7
@@ -36,3 +31,15 @@ db:
         MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+dbdata:
+  image: cogniteev/echo
+  command: echo 'Database Data Container'
+  volumes:
+    - /var/lib/mysql
+
+data:
+  image: cogniteev/echo
+  command: echo 'Data Container'
+  volumes:
+    - ./var/www/html:/var/www/html

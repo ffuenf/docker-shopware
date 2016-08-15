@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -eu
 
 output_dir=$1

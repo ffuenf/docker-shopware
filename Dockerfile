@@ -16,17 +16,32 @@ RUN apt-get update \
     openjdk-8-jdk \
     wget \
     zlib1g-dev \
-    apache2 \
-    apache2-utils \
+    php-common \
+    php-dev \
+    php-pear \
+    php-pecl-http \
+    php-imap \
+    php-intl \
+    php-json \
+    php-mysql \
+    php-opcache \
+    php-oauth \
+    php-pspell \
+    php-ldap \
+    php-xml \
+    php-soap \
+    php-mbstring \
     php-apcu \
     php-cli \
     php-curl \
     php-gd \
     php-mcrypt \
     php-zip \
-    phpmyadmin \
     unzip \
     bzip2 \
+    apache2 \
+    apache2-utils \
+    libapache2-mod-php \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 RUN mkdir /tmp/ioncube && \
@@ -57,15 +72,11 @@ RUN a2enmod rewrite \
     && phpenmod mcrypt
 
 COPY files/config.php.tmpl /config.php.tmpl
-COPY files/config-db.php.tmpl /config-db.php.tmpl
-COPY files/phpmyadmin.config.php.tmpl /phpmyadmin.config.php.tmpl
-
-RUN ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-enabled/phpmyadmin.conf
 
 VOLUME ["/var/www/html"]
 
-COPY files/substitute-env-vars.sh /substitute-env-vars.sh
-RUN chmod +x /substitute-env-vars.sh
+COPY files/substitute-env-vars.sh /bin/substitute-env-vars.sh
+RUN chmod +x /bin/substitute-env-vars.sh
 
 COPY files/entrypoint.sh /entrypoint.sh
 

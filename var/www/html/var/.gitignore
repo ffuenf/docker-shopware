@@ -1,3 +1,4 @@
 *
 !.gitignore
-!apache
+!log/apache
+!log/apache/.htaccess
