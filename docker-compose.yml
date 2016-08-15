@@ -11,7 +11,6 @@ shopware:
       SERVERNAME: ${SERVERNAME}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       SHOPWARE_VERSION: ${SHOPWARE_VERSION}
-      APACHE_LOG_DIR: /var/www/html/var/log/apache
       MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_PORT: ${MYSQL_PORT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -42,4 +41,4 @@ data:
   image: cogniteev/echo
   command: echo 'Data Container'
   volumes:
-    - ./var/www/html:/var/www/html
+    - ./public:/var/www/html

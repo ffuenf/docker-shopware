@@ -70,7 +70,7 @@ Project Setup
 --------------
 
 You may start a fresh shopware project by including [docker-compose.yml](docker-compose.yml) and your customized [.env](.env).
-Also create the folder-structure `var/www/html` in which shopware will be installed initially.
+Create `public/` as your document root where shopware will initially be installed.
 
 CAUTION! Use [Docker.app](https://www.docker.com/products/docker#/mac) under OSX to properly circumvent any issues with file/folder permissions.
 
