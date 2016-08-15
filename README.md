@@ -32,16 +32,15 @@ php7            | required to run shopware
 ionCube Loader  | required to run encrypted shopware extensions
 composer        | not directly required by Shopware, as the build will also install a local composer for Shopware, but you can also use it to install Shopware via https://packagist.org/packages/shopware/shopware
 curl, git, wget | necessary to execute tasks defined in Shopware's build.xml and for composer to install dependencies
-openjdk-8-jdk   | required by Ant
+openjdk-8-jdk   | required by ant
 mysql-client    | required by Shopware's build.xml to connect to the SQL database server located in another docker container
 xdebug          | used for debugging PHP
-phpmyadmin      | access to mysql database
 
 Exposed Ports
 -------------
 
 * 80
-* 3306
+* 3306 (by db container)
 
 Environment Variables
 ---------------------
@@ -50,14 +49,15 @@ See [.env](.env) for an example.
 ```
     SHOPWARE_VERSION=5.2.4_b1a52d04c9c8cd60205c181eb7d51aa5a516bff0
     
+    SERVERNAME=shopware.example.com
+    ADMIN_EMAIL=demo@demo.demo
+    
     MYSQL_HOST=db:3306
     MYSQL_PORT=3306
     MYSQL_ROOT_PASSWORD=root
     MYSQL_DATABASE=shopware
     MYSQL_USER=shopware
     MYSQL_PASSWORD=yourpassword
-    
-    PHPMYADMIN_PW=yourpassword
 ```
 You may overwrite these settings in your project-specific .env.
 
@@ -71,6 +71,8 @@ Project Setup
 
 You may start a fresh shopware project by including [docker-compose.yml](docker-compose.yml) and your customized [.env](.env).
 Also create the folder-structure `var/www/html` in which shopware will be installed initially.
+
+CAUTION! Use [Docker.app](https://www.docker.com/products/docker#/mac) under OSX to properly circumvent any issues with file/folder permissions.
 
 Development
 -----------
