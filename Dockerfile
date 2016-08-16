@@ -7,6 +7,7 @@ RUN apt-get update \
     ant \
     curl \
     git \
+    openssl \
     libfreetype6-dev \
     libmcrypt-dev \
     libpng12-dev \
@@ -67,8 +68,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY files/apache-shopware.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite \
-    && sed --in-place "s/^upload_max_filesize.*$/upload_max_filesize = 10M/" /etc/php/7.0/apache2/php.ini \
-    && sed --in-place "s/^memory_limit.*$/memory_limit = 256M/" /etc/php/7.0/apache2/php.ini \
+    && a2enmod ssl \
+    && sed --in-place "s/^upload_max_filesize.*$/upload_max_filesize = 20M/" /etc/php/7.0/apache2/php.ini \
+    && sed --in-place "s/^memory_limit.*$/memory_limit = 512M/" /etc/php/7.0/apache2/php.ini \
+    && sed --in-place "s/^allow_url_fopen.*$/allow_url_fopen = On/" /etc/php/7.0/apache2/php.ini \
     && phpenmod mcrypt
 
 COPY files/config.php.tmpl /config.php.tmpl

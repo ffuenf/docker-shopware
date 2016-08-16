@@ -40,5 +40,15 @@ echo "done"
 echo "preparing the shopware configuration"
 substitute-env-vars.sh /var/www/html/ /config.php.tmpl
 
+if [ ! -e "/etc/ssl/certs/shopware.pem" ] || [ ! -e "/etc/ssl/certs/shopware.key" ]
+then
+  echo "generating self signed cert"
+  openssl req -x509 -newkey rsa:4086 \
+  -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=$SERVERNAME" \
+  -keyout "/etc/ssl/certs/shopware.key" \
+  -out "/etc/ssl/certs/shopware.pem" \
+  -days 3650 -nodes -sha256
+fi
+
 source /etc/apache2/envvars
 exec apache2 -D FOREGROUND
