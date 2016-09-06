@@ -37,8 +37,11 @@ for i in config.php \
 done
 echo "done"
 
-echo "preparing the shopware configuration"
-substitute-env-vars.sh /var/www/html/ /config.php.tmpl
+if [ ! -d "/var/www/html/vendor/vlucas/phpdotenv" ]
+then
+    echo "preparing the shopware configuration"
+    substitute-env-vars.sh /var/www/html/ /config.php.tmpl
+fi
 
 if [ ! -e "/etc/ssl/certs/shopware.pem" ] || [ ! -e "/etc/ssl/certs/shopware.key" ]
 then

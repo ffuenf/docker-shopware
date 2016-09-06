@@ -3,6 +3,8 @@ shopware:
   restart: always
   volumes_from:
     - data
+  volumes:
+    - ./logs:/var/log/apache2
   links:
    - db
   ports:
