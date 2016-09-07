@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of docker-shopware.
 
+## 1.0.3 (September 6, 2016)
+
+* update to shopware 5.2.6
+* only add config if we're running without phpdotenv
+* link out apache2 logs for debugging
+
 ## 1.0.2 (August 16, 2016)
 
 * add SSL configuration (self-signed)
