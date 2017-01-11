@@ -48,21 +48,13 @@ RUN apt-get update \
 RUN mkdir /tmp/ioncube && \
     mkdir -p /usr/local/ioncube && \
     cd /tmp/ioncube && \
-    wget -q https://www.ioncube.com/php7-linux-x86-64-beta8.tgz -O /tmp/ioncube/php7-linux-x86-64-beta8.tgz && \
-    tar xvf /tmp/ioncube/php7-linux-x86-64-beta8.tgz && \
+    wget -q http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -O /tmp/ioncube/ioncube_loaders_lin_x86-64.tar.gz && \
+    tar xvf /tmp/ioncube/ioncube_loaders_lin_x86-64.tar.gz && \
     cd `php -i | grep extension_dir | cut -d' ' -f 5` && \
-    cp /tmp/ioncube/ioncube_loader_lin_x86-64_7.0b8.so /usr/local/ioncube/ioncube_loader_lin_x86-64_7.0b8.so && \
-    echo zend_extension=/usr/local/ioncube/ioncube_loader_lin_x86-64_7.0b8.so > /etc/php/7.0/apache2/conf.d/00-ioncube.ini && \
-    echo zend_extension=/usr/local/ioncube/ioncube_loader_lin_x86-64_7.0b8.so > /etc/php/7.0/cli/conf.d/00-ioncube.ini && \
+    cp /tmp/ioncube/ioncube/ioncube_loader_lin_7.0.so /usr/local/ioncube/ioncube_loader_lin_7.0.so && \
+    echo zend_extension=/usr/local/ioncube/ioncube_loader_lin_7.0.so > /etc/php/7.0/apache2/conf.d/00-ioncube.ini && \
+    echo zend_extension=/usr/local/ioncube/ioncube_loader_lin_7.0.so > /etc/php/7.0/cli/conf.d/00-ioncube.ini && \
     rm -rf /tmp/ioncube/
-
-RUN pecl install xdebug
-RUN touch /etc/php/7.0/apache2/conf.d/xdebug.ini; \
-    echo xdebug.remote_enable=1 >> /etc/php/7.0/apache2/conf.d/xdebug.ini; \
-    echo xdebug.remote_autostart=0 >> /etc/php/7.0/apache2/conf.d/xdebug.ini; \
-    echo xdebug.remote_connephpct_back=1 >> /etc/php/7.0/apache2/conf.d/xdebug.ini; \
-    echo xdebug.remote_port=9000 >> /etc/php/7.0/apache2/conf.d/xdebug.ini; \
-    echo xdebug.remote_log=/tmp/php-xdebug.log >> /etc/php/7.0/apache2/conf.d/xdebug.ini;
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
