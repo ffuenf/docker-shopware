@@ -37,7 +37,7 @@ for i in config.php \
 done
 echo "done"
 
-if [ ! -d "/var/www/html/vendor/vlucas/phpdotenv" ]
+if [ ! -d "/var/www/html/vendor/vlucas/phpdotenv" ] && [ ! -f "/var/www/html/config.php" ]
 then
     echo "preparing the shopware configuration"
     substitute-env-vars.sh /var/www/html/ /config.php.tmpl
