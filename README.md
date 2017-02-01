@@ -1,5 +1,9 @@
 <a href="http://www.ffuenf.de" title="ffuenf - code • design • e-commerce"><img src="https://github.com/ffuenf/Ffuenf_Common/blob/master/skin/adminhtml/default/default/ffuenf/ffuenf.png" alt="ffuenf - code • design • e-commerce" /></a>
 
+# DISCONTINUED!
+While working with docker on OSX hosts has major performance issues we switched to a vagrant-based approach.
+Have a look at [shopware-vagrant](https://github.com/ffuenf/shopware-vagrant) for a better approach.
+
 docker-shopware
 ===============
 [![GitHub tag](https://img.shields.io/github/tag/ffuenf/docker-shopware.svg)][tag]
